@@ -1,14 +1,126 @@
-const header=document.querySelector('.site-header');const menuToggle=document.querySelector('.menu-toggle');const primaryNav=document.querySelector('.primary-nav');const navLinks=document.querySelectorAll('.primary-nav a');
-const updateHeader=()=>header?.classList.toggle('scrolled',window.scrollY>8);window.addEventListener('scroll',updateHeader,{passive:true});updateHeader();
-menuToggle?.addEventListener('click',()=>{const isOpen=primaryNav?.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(Boolean(isOpen)));menuToggle.textContent=isOpen?'Close':'Menu';document.body.classList.toggle('menu-open',Boolean(isOpen))});
-navLinks.forEach(link=>link.addEventListener('click',()=>{primaryNav?.classList.remove('open');menuToggle?.setAttribute('aria-expanded','false');if(menuToggle)menuToggle.textContent='Menu';document.body.classList.remove('menu-open')}));
+const header=document.querySelector('.site-header');
+const menuToggle=document.querySelector('.menu-toggle');
+const primaryNav=document.querySelector('.primary-nav');
+const navLinks=document.querySelectorAll('.primary-nav a');
 
-const sourceText=document.querySelector('#source-text');const charCount=document.querySelector('#char-count');const sourceLang=document.querySelector('#source-lang');const targetLang=document.querySelector('#target-lang');const swapButton=document.querySelector('#swap-languages');const translateButton=document.querySelector('#translate-button');const translationResult=document.querySelector('#translation-result');const translatorStatus=document.querySelector('#translator-status');const copyResult=document.querySelector('#copy-result');
-const updateCount=()=>{if(sourceText&&charCount)charCount.textContent=String(sourceText.value.length)};sourceText?.addEventListener('input',updateCount);updateCount();
+const updateHeader=()=>header?.classList.toggle('scrolled',window.scrollY>8);
+window.addEventListener('scroll',updateHeader,{passive:true});
+updateHeader();
+
+const closeMenu=()=>{
+  primaryNav?.classList.remove('open');
+  menuToggle?.setAttribute('aria-expanded','false');
+  if(menuToggle)menuToggle.textContent='Menu';
+  document.body.classList.remove('menu-open');
+};
+
+const openMenu=()=>{
+  primaryNav?.classList.add('open');
+  menuToggle?.setAttribute('aria-expanded','true');
+  if(menuToggle)menuToggle.textContent='Close';
+  document.body.classList.add('menu-open');
+  const firstLink=primaryNav?.querySelector('a');
+  window.setTimeout(()=>firstLink?.focus(),50);
+};
+
+menuToggle?.addEventListener('click',()=>{
+  const isOpen=primaryNav?.classList.contains('open');
+  isOpen?closeMenu():openMenu();
+});
+navLinks.forEach(link=>link.addEventListener('click',closeMenu));
+document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()});
+window.addEventListener('resize',()=>{if(window.innerWidth>720)closeMenu()},{passive:true});
+
+const sourceText=document.querySelector('#source-text');
+const charCount=document.querySelector('#char-count');
+const sourceLang=document.querySelector('#source-lang');
+const targetLang=document.querySelector('#target-lang');
+const swapButton=document.querySelector('#swap-languages');
+const translateButton=document.querySelector('#translate-button');
+const translationResult=document.querySelector('#translation-result');
+const translatorStatus=document.querySelector('#translator-status');
+const copyResult=document.querySelector('#copy-result');
+
+const updateCount=()=>{if(sourceText&&charCount)charCount.textContent=String(sourceText.value.length)};
+sourceText?.addEventListener('input',updateCount);
+updateCount();
+
 const setStatus=(message,type='default')=>{if(translatorStatus){translatorStatus.textContent=message;translatorStatus.dataset.type=type}};
-swapButton?.addEventListener('click',()=>{if(!sourceLang||!targetLang)return;const current=sourceLang.value;sourceLang.value=targetLang.value;targetLang.value=current;if(translationResult?.classList.contains('has-result')&&sourceText){const previous=sourceText.value;sourceText.value=translationResult.textContent||'';translationResult.textContent=previous||'번역 결과가 여기에 표시됩니다.';updateCount()}});
-translateButton?.addEventListener('click',async()=>{const text=sourceText?.value.trim()||'';if(!text){setStatus('번역할 내용을 먼저 입력해주세요.','error');sourceText?.focus();return}if(sourceLang?.value===targetLang?.value){setStatus('원문과 번역 언어를 다르게 선택해주세요.','error');targetLang?.focus();return}if(location.hostname.endsWith('github.io')){setStatus('현재 GitHub Pages 버전은 번역 API 연결 전입니다.','error');translationResult.textContent='HANZI QUICK의 입력 UI는 준비되어 있으며 번역 API 연결 후 결과가 표시됩니다.';translationResult.classList.remove('has-result');return}translateButton.disabled=true;translateButton.textContent='Translating…';setStatus('번역 중입니다.');try{const response=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,source:sourceLang?.value,target:targetLang?.value})});if(!response.ok)throw new Error();const data=await response.json();const translated=data.translation||data.translatedText;if(!translated)throw new Error();translationResult.textContent=translated;translationResult.classList.add('has-result');setStatus('번역이 완료되었습니다.','success')}catch{translationResult.textContent='번역 API를 확인해주세요.';translationResult.classList.remove('has-result');setStatus('번역 서버와 연결하지 못했습니다.','error')}finally{translateButton.disabled=false;translateButton.textContent='Translate'}});
-copyResult?.addEventListener('click',async()=>{const value=translationResult?.classList.contains('has-result')?translationResult.textContent?.trim():'';if(!value){setStatus('복사할 번역 결과가 없습니다.','error');return}try{await navigator.clipboard.writeText(value);copyResult.textContent='Copied';setStatus('번역 결과를 복사했습니다.','success');setTimeout(()=>copyResult.textContent='Copy',1400)}catch{setStatus('복사하지 못했습니다. 텍스트를 직접 선택해주세요.','error')}});
 
-const serviceSelect=document.querySelector('#service-select');if(serviceSelect){const requested=new URLSearchParams(location.search).get('service');if(requested&&[...serviceSelect.options].some(option=>option.value===requested))serviceSelect.value=requested}
-const contactForm=document.querySelector('#contact-form');const formStatus=document.querySelector('#form-status');contactForm?.addEventListener('submit',async event=>{event.preventDefault();const data=new FormData(contactForm);const summary=`HANZI LAB 프로젝트 문의\n\n이름: ${data.get('name')||'-'}\n회사명: ${data.get('company')||'-'}\n이메일: ${data.get('email')||'-'}\n연락처: ${data.get('phone')||'-'}\n서비스: ${serviceSelect?.selectedOptions[0]?.textContent||data.get('service')||'-'}\n예산: ${data.get('budget')||'-'}\n일정: ${data.get('schedule')||'-'}\n\n프로젝트 설명:\n${data.get('message')||'-'}`;try{await navigator.clipboard.writeText(summary);if(formStatus)formStatus.textContent='문의 내용이 클립보드에 정리되었습니다. 실제 전송 기능은 이메일 연결 후 활성화됩니다.'}catch{if(formStatus)formStatus.textContent='현재 실제 전송 기능 연결 전입니다. 입력하신 내용은 이 페이지에서 전송되지 않습니다.'}});
+swapButton?.addEventListener('click',()=>{
+  if(!sourceLang||!targetLang)return;
+  const current=sourceLang.value;
+  sourceLang.value=targetLang.value;
+  targetLang.value=current;
+  if(translationResult?.classList.contains('has-result')&&sourceText){
+    const previous=sourceText.value;
+    sourceText.value=translationResult.textContent||'';
+    translationResult.textContent=previous||'번역 결과가 여기에 표시됩니다.';
+    updateCount();
+  }
+});
+
+translateButton?.addEventListener('click',async()=>{
+  const text=sourceText?.value.trim()||'';
+  if(!text){setStatus('번역할 내용을 먼저 입력해주세요.','error');sourceText?.focus();return}
+  if(sourceLang?.value===targetLang?.value){setStatus('원문과 번역 언어를 다르게 선택해주세요.','error');targetLang?.focus();return}
+  if(location.hostname.endsWith('github.io')){
+    setStatus('현재 GitHub Pages 버전은 번역 API 연결 전입니다.','error');
+    translationResult.textContent='HANZI QUICK의 입력 UI는 준비되어 있으며 번역 API 연결 후 결과가 표시됩니다.';
+    translationResult.classList.remove('has-result');
+    return;
+  }
+  translateButton.disabled=true;
+  translateButton.textContent='Translating…';
+  setStatus('번역 중입니다.');
+  try{
+    const response=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,source:sourceLang?.value,target:targetLang?.value})});
+    if(!response.ok)throw new Error();
+    const data=await response.json();
+    const translated=data.translation||data.translatedText;
+    if(!translated)throw new Error();
+    translationResult.textContent=translated;
+    translationResult.classList.add('has-result');
+    setStatus('번역이 완료되었습니다.','success');
+  }catch{
+    translationResult.textContent='번역 API를 확인해주세요.';
+    translationResult.classList.remove('has-result');
+    setStatus('번역 서버와 연결하지 못했습니다.','error');
+  }finally{
+    translateButton.disabled=false;
+    translateButton.textContent='Translate';
+  }
+});
+
+copyResult?.addEventListener('click',async()=>{
+  const value=translationResult?.classList.contains('has-result')?translationResult.textContent?.trim():'';
+  if(!value){setStatus('복사할 번역 결과가 없습니다.','error');return}
+  try{
+    await navigator.clipboard.writeText(value);
+    copyResult.textContent='Copied';
+    setStatus('번역 결과를 복사했습니다.','success');
+    setTimeout(()=>copyResult.textContent='Copy',1400);
+  }catch{
+    setStatus('복사하지 못했습니다. 텍스트를 직접 선택해주세요.','error');
+  }
+});
+
+const serviceSelect=document.querySelector('#service-select');
+if(serviceSelect){
+  const requested=new URLSearchParams(location.search).get('service');
+  if(requested&&[...serviceSelect.options].some(option=>option.value===requested))serviceSelect.value=requested;
+}
+
+const contactForm=document.querySelector('#contact-form');
+const formStatus=document.querySelector('#form-status');
+contactForm?.addEventListener('submit',async event=>{
+  event.preventDefault();
+  const data=new FormData(contactForm);
+  const summary=`HANZI LAB 프로젝트 문의\n\n이름: ${data.get('name')||'-'}\n회사명: ${data.get('company')||'-'}\n이메일: ${data.get('email')||'-'}\n연락처: ${data.get('phone')||'-'}\n서비스: ${serviceSelect?.selectedOptions[0]?.textContent||data.get('service')||'-'}\n예산: ${data.get('budget')||'-'}\n일정: ${data.get('schedule')||'-'}\n\n프로젝트 설명:\n${data.get('message')||'-'}`;
+  try{
+    await navigator.clipboard.writeText(summary);
+    if(formStatus)formStatus.textContent='문의 내용이 클립보드에 정리되었습니다. 실제 전송 기능은 이메일 연결 후 활성화됩니다.';
+  }catch{
+    if(formStatus)formStatus.textContent='현재 실제 전송 기능 연결 전입니다. 입력하신 내용은 이 페이지에서 전송되지 않습니다.';
+  }
+});

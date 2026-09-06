@@ -1,0 +1,17 @@
+{
+  "name": "HANZI LAB",
+  "short_name": "HANZI",
+  "description": "Korea ↔ China Business Support",
+  "start_url": "/hanzi/",
+  "scope": "/hanzi/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d1262f",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

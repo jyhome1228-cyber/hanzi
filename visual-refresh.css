@@ -1,0 +1,21 @@
+/* HANZI LAB — visual hierarchy & separation refresh */
+:root{--hairline:rgba(21,21,21,.08);--hairline-strong:rgba(21,21,21,.14)}
+main>.section,main>.page-hero,main>.home-hero,main>.cta-band{position:relative}main>.section{border-top:1px solid var(--hairline)!important}.page-hero,.home-hero{border-bottom:1px solid var(--hairline)!important}.section-subtle{background:#faf9f8!important}.section-head{margin-bottom:64px!important}
+
+/* Home hero */
+.home-hero{padding:128px 0 104px!important;background:#fff!important}.home-hero .hero-layout{display:grid;grid-template-columns:minmax(0,.82fr) minmax(520px,1.18fr);gap:clamp(56px,6vw,104px);align-items:center}.home-hero .hero-copy{max-width:620px}.home-hero .hero-copy .eyebrow{margin-bottom:28px!important}.home-hero .hero-copy h1{max-width:560px!important;margin:0}.home-hero .hero-copy .lead{max-width:580px;margin:30px 0 0}.home-hero .hero-copy .button-row{margin-top:40px!important}.hero-visual{overflow:hidden;border:1px solid var(--hairline);border-radius:12px;background:#f7f4f1}.hero-visual img{display:block;width:100%;height:auto;aspect-ratio:16/11;object-fit:cover}.home-hero .meta-strip{margin-top:56px!important}.home-hero .meta-strip div{border:1px solid var(--hairline)!important;background:#fff!important}
+
+/* Cards */
+.direction-card,.service-card,.work-card,.principle-card,.price-card{border-color:var(--hairline)!important}.direction-card:hover,.service-card:hover,.work-card:hover{border-color:var(--hairline-strong)!important}.direction-card,.service-card{background:#fff!important}
+
+/* Work page */
+.case-study{display:grid!important;grid-template-columns:210px minmax(0,1fr)!important;gap:clamp(48px,6vw,96px)!important;padding:56px!important;border:1px solid var(--hairline)!important;border-radius:12px!important;background:#fff!important}.case-study+.case-study{margin-top:24px!important}.case-meta{padding-top:4px}.case-meta span{display:block;margin-bottom:14px}.case-meta strong{display:block;color:var(--text-2);font-size:15px!important;line-height:1.6}.case-body h2{margin:0;max-width:760px}.case-body>.muted{margin:18px 0 38px!important;max-width:760px}.case-flow{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}.case-flow div{min-height:112px;display:flex;flex-direction:column;justify-content:space-between;padding:18px 18px 20px!important;border:1px solid var(--hairline)!important;border-radius:8px!important;background:#fff!important}.case-flow span{font-size:12px!important;font-weight:600!important;color:var(--brand)!important}.case-flow strong{margin-top:20px!important;font-size:15px!important;line-height:1.5!important;font-weight:500!important}
+
+/* Gentle visual section rhythm */
+main>.section:nth-of-type(odd):not(.section-subtle):not(.section-inverse){background:#fff}main>.section:nth-of-type(even):not(.section-subtle):not(.section-inverse){background:#fcfbfa}.site-header{border-bottom:1px solid var(--hairline)!important}.primary-nav .button-small{min-width:92px}
+
+/* Mobile */
+@media(max-width:1100px){.home-hero .hero-layout{grid-template-columns:1fr;gap:56px}.home-hero .hero-copy{max-width:760px}.hero-visual img{aspect-ratio:16/10}.case-study{grid-template-columns:1fr!important;gap:32px!important;padding:40px!important}}
+@media(max-width:900px){.case-flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){.home-hero{padding:88px 0 80px!important}.home-hero .hero-layout{gap:40px}.hero-visual{border-radius:10px}.hero-visual img{aspect-ratio:4/3;object-position:center}.home-hero .meta-strip{margin-top:40px!important}.case-study{padding:24px!important}.case-flow{grid-template-columns:1fr!important}.case-flow div{min-height:92px}main>.section{border-top-color:rgba(21,21,21,.07)!important}}
+@media(max-width:520px){.hero-visual img{aspect-ratio:1/1}}

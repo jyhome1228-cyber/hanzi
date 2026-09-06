@@ -1,52 +1,50 @@
-/* ABOUT / TRANSLATOR — spacing-led layout */
-.about-page .section-head-copy{max-width:820px}
-.about-page .about-copy{max-width:760px}
-.about-page .about-copy p+p{margin-top:16px}
+/* ABOUT / TRANSLATOR — page-specific details only; global spacing comes from sost-system.css */
+.about-page .section-head-copy{max-width:880px}
+.about-page .about-copy{max-width:800px}
+.about-page .about-copy p+p{margin-top:18px}
 .about-intro-section{background:#fff}
 
 .translator-section{background:var(--surface-soft)}
-.translator-heading{margin-bottom:48px}
-.translator-profile{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:72px;align-items:start}
-.translator-role{display:block;margin-bottom:12px;color:var(--brand);font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.translator-intro h3{margin:0;font-size:32px;line-height:40px;letter-spacing:-.035em}
-.translator-intro>p{max-width:34ch;margin:20px 0 0;color:var(--text-2);font-size:16px;line-height:28px}
-.translator-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-.translator-badges span{padding:8px 12px;border:0;border-radius:999px;background:#fff;color:var(--text);font-size:12px;line-height:18px;font-weight:700}
+.translator-heading{margin-bottom:64px!important}
+.translator-profile{display:grid;grid-template-columns:360px minmax(0,1fr);gap:clamp(56px,7vw,120px);align-items:start}
+.translator-role{display:block;margin-bottom:18px;color:var(--brand)}
+.translator-intro h3{margin:0;font-size:clamp(26px,2.1vw,32px);line-height:1.35;font-weight:540;letter-spacing:-.03em}
+.translator-intro>p{max-width:34ch;margin:24px 0 0;color:var(--text-2);font-size:17px;line-height:1.7;font-weight:400}
+.translator-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.translator-badges span{padding:8px 12px;border:0;border-radius:999px;background:#fff;color:var(--text);font-size:13px;line-height:1.5;font-weight:500}
 
-.translator-details{display:flex;min-width:0;flex-direction:column;gap:40px}
-.translator-facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px 40px}
+.translator-details{display:flex;min-width:0;flex-direction:column;gap:44px}
+.translator-facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 56px}
 .translator-fact{min-width:0}
-.translator-fact span{display:block;margin-bottom:10px;color:var(--brand);font-size:11px;line-height:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
-.translator-fact strong{display:block;font-size:17px;line-height:26px;font-weight:700}
-.translator-fact p{max-width:440px;margin:8px 0 0;color:var(--text-2);font-size:14px;line-height:23px}
+.translator-fact span{display:block;margin-bottom:12px;color:var(--brand)}
+.translator-fact strong{display:block;font-size:18px;line-height:1.5;font-weight:540;letter-spacing:-.02em}
+.translator-fact p{max-width:520px;margin:8px 0 0;color:var(--text-2);font-size:16px;line-height:1.7}
 
-.translator-projects{padding:28px;border:0;border-radius:12px;background:#fff}
-.translator-projects>span{display:block;margin-bottom:10px;color:var(--brand);font-size:11px;line-height:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
-.translator-projects>strong{display:block;font-size:16px;line-height:25px;font-weight:700}
-.translator-projects>p{max-width:760px;margin:12px 0 0;color:var(--text-2);font-size:14px;line-height:23px}
-.translator-tools{margin:0;color:var(--text-3);font-size:12px;line-height:18px}
-.translator-tools strong{color:var(--text-2)}
+.translator-projects{padding:30px 32px;border:1px solid var(--border);border-radius:12px;background:#fff}
+.translator-projects>span{display:block;margin-bottom:12px;color:var(--brand)}
+.translator-projects>strong{display:block;font-size:18px;line-height:1.55;font-weight:540;letter-spacing:-.02em}
+.translator-projects>p{max-width:820px;margin:14px 0 0;color:var(--text-2);font-size:16px;line-height:1.7}
+.translator-tools{margin:0;color:var(--text-3);font-size:14px;line-height:1.6}
+.translator-tools strong{color:var(--text-2);font-weight:500}
 
 .about-principles-section .principle-card{background:#fff}
-.about-capabilities-section .capability-list{grid-template-columns:1fr 1fr;gap:36px 56px}
-.about-capabilities-section .capability-list>div{padding:0;border:0}
-.about-capabilities-section .capability-list strong{font-size:16px;line-height:24px}
-.about-capabilities-section .capability-list p{max-width:540px;margin-top:8px;color:var(--text-2);font-size:14px;line-height:23px}
-.about-direction-section .about-copy{max-width:720px}
+.about-capabilities-section .capability-list{gap:42px 72px!important}
+.about-direction-section .about-copy{max-width:760px}
 
 @media(max-width:1023px){
-  .translator-profile{grid-template-columns:1fr;gap:48px}
-  .translator-intro>p{max-width:640px}
-  .translator-facts-grid{grid-template-columns:1fr 1fr;gap:28px 24px}
+  .translator-profile{grid-template-columns:1fr;gap:56px}
+  .translator-intro>p{max-width:680px}
+  .translator-facts-grid{grid-template-columns:1fr 1fr;gap:36px 32px}
 }
 
-@media(max-width:720px){
-  .translator-heading{margin-bottom:36px}
-  .translator-profile{gap:36px}
-  .translator-intro h3{font-size:28px;line-height:36px}
-  .translator-intro>p{max-width:none;margin-top:16px;font-size:16px;line-height:26px}
-  .translator-badges{margin-top:24px}
-  .translator-facts-grid{grid-template-columns:1fr;gap:26px}
-  .translator-projects{padding:22px}
-  .about-capabilities-section .capability-list{grid-template-columns:1fr;gap:28px}
+@media(max-width:760px){
+  .translator-heading{margin-bottom:44px!important}
+  .translator-profile{gap:44px}
+  .translator-intro>p{max-width:none;margin-top:18px;font-size:16px;line-height:1.7}
+  .translator-badges{margin-top:26px}
+  .translator-facts-grid{grid-template-columns:1fr;gap:32px}
+  .translator-projects{padding:24px}
+  .translator-projects>strong{font-size:17px}
+  .translator-projects>p{font-size:16px}
+  .about-capabilities-section .capability-list{grid-template-columns:1fr!important;gap:34px!important}
 }

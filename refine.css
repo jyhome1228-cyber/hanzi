@@ -1,0 +1,176 @@
+/* HANZI LAB — Universal Web Design System refinement layer */
+:root{
+  --font-display:48px;
+  --font-page:40px;
+  --font-section:32px;
+  --font-component:20px;
+  --font-body:16px;
+  --font-secondary:14px;
+  --font-label:13px;
+  --font-caption:12px;
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-bold:700;
+  --section-gap:72px;
+  --section-gap-sm:56px;
+  --reading:680px;
+  --control-height:48px;
+  --button-sm:40px;
+  --button-lg:52px;
+}
+
+html{background:var(--bg)}
+body{font-weight:var(--weight-regular);line-height:1.5;word-break:keep-all}
+main{overflow:clip}
+p{margin-bottom:0}
+
+/* Shared layout — header and page content use one 1280px alignment */
+.container,.container-wide{width:min(calc(100% - 64px),1280px);margin-inline:auto}
+.page-hero-side p,.lead,.section-head p:not(.eyebrow),.about-copy,.contact-aside p{max-width:var(--reading)}
+
+/* Navigation */
+.site-header{min-height:72px;background:rgba(255,255,255,.97)}
+.header-inner{min-height:72px}
+.brand{font-size:18px;line-height:24px}
+.primary-nav{gap:24px}
+.primary-nav>a:not(.button){font-size:14px}
+.primary-nav>a[aria-current="page"]:after{bottom:2px;height:2px}
+.button-small{min-height:var(--button-sm);padding-inline:16px}
+
+/* Type hierarchy */
+.page-hero h1,.home-hero h1{font-size:clamp(40px,4vw,var(--font-display));line-height:1.12;letter-spacing:-.04em}
+.page-hero-copy h1{max-width:820px}
+.section-head h2,.about-grid h2,.cta-band h2{font-size:var(--font-section);line-height:1.3;letter-spacing:-.03em}
+.group-title h2{font-size:26px;line-height:34px}
+.service-card h3,.service-row h3{font-size:var(--font-component);line-height:28px}
+.eyebrow{margin-bottom:16px;font-size:var(--font-caption);line-height:16px}
+
+/* Page rhythm */
+.page-hero{padding:88px 0 64px}
+.home-hero{padding:96px 0 64px}
+.section{padding:var(--section-gap) 0}
+.section-sm{padding:var(--section-gap-sm) 0}
+.section-head{margin-bottom:40px}
+.service-group+.service-group{margin-top:64px}
+
+/* Direction blocks */
+.direction-card{min-height:280px;padding-top:28px;padding-bottom:28px}
+.direction-card .number{margin-bottom:56px}
+.direction-card p{font-size:14px;line-height:22px}
+
+/* Service system */
+.service-overview{border-top-color:var(--border-strong)}
+.service-card{min-height:208px;padding-top:24px;padding-bottom:24px}
+.service-card .service-en{margin-top:36px}
+.service-card p{font-size:14px;line-height:22px}
+.service-row{padding:24px 0;grid-template-columns:72px minmax(0,1fr) 240px}
+.service-row .deliverable{min-height:100%;padding-left:24px}
+
+/* Non-interactive cards should not imitate buttons */
+.work-card,.principle-card{border-radius:12px;box-shadow:none}
+.work-card{min-height:264px;padding:24px}
+.work-card:hover{transform:none;border-color:var(--border);background:var(--surface)}
+.principle-card{padding:24px}
+
+/* Process */
+.process-grid article{min-height:176px;padding-top:20px}
+.process-grid span{margin-bottom:40px}
+
+/* Translator */
+.translator,.quick-preview-box{border-radius:12px}
+.translator-shell{max-width:1280px}
+.translator-toolbar select{height:56px;font-weight:var(--weight-medium)}
+.swap-button{transition:background var(--fast) var(--ease),border-color var(--fast) var(--ease),color var(--fast) var(--ease)}
+.swap-button:hover{background:var(--surface-brand);border-color:var(--brand-100);color:var(--brand)}
+.text-button:hover{background:var(--surface-brand);border-radius:8px}
+.translator-actions p[data-type="success"]{color:#237a57}
+.translator-actions p[data-type="error"]{color:var(--brand-600)}
+
+/* Pricing — stronger hierarchy, no decorative shadow */
+.pricing-grid{border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
+.price-card{min-height:316px;padding:28px 24px;border-bottom:0;background:var(--surface)}
+.price-card:first-child{border-left:1px solid var(--border)}
+.price-card .tier{font-size:12px;line-height:16px}
+.price-card h2{margin:48px 0 8px;font-size:26px;line-height:34px;letter-spacing:-.025em}
+.price-card>.desc{min-height:44px;font-size:14px;line-height:22px}
+.price-card ul{margin-top:24px;padding-top:20px}
+.price-card li{padding:4px 0;font-size:13px;line-height:20px}
+.pricing-table{margin-top:56px}
+.pricing-row{grid-template-columns:4fr 5fr 3fr;align-items:center;padding:18px 0;font-size:14px}
+.pricing-row>*:last-child{text-align:right}
+
+/* About */
+.about-grid{gap:64px}
+.about-copy p{font-size:16px;line-height:24px}
+.principle-card h3{margin-top:40px}
+.capability-list div{padding:20px 0}
+
+/* Forms and states */
+.contact-layout{gap:72px}
+.contact-form{gap:20px 16px}
+.contact-form label{gap:8px;font-size:13px;line-height:18px}
+.contact-form input,.contact-form select,.contact-form textarea{border-radius:8px;border-color:var(--border);transition:border-color var(--fast) var(--ease),box-shadow var(--fast) var(--ease),background var(--fast) var(--ease)}
+.contact-form input,.contact-form select{min-height:var(--control-height)}
+.contact-form input:hover,.contact-form select:hover,.contact-form textarea:hover{border-color:var(--border-strong)}
+.contact-form input:focus-visible,.contact-form select:focus-visible,.contact-form textarea:focus-visible{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--focus)}
+.contact-form [aria-invalid="true"]{border-color:var(--brand)}
+.contact-form input:disabled,.contact-form select:disabled,.contact-form textarea:disabled{background:#f1efee;color:#aaa5a2;cursor:not-allowed}
+.button:disabled{background:#e8e4e2;border-color:#e8e4e2;color:#9d9794;cursor:not-allowed;transform:none}
+
+/* CTA / Footer */
+.cta-band{padding:52px 0;background:var(--brand-700)}
+.cta-band p{color:#ffd9dc}
+.cta-band .button-secondary{border-color:rgba(255,255,255,.45)}
+.cta-band .button-secondary:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.site-footer{padding:32px 0}
+
+/* Responsive behavior: reflow, not simple scaling */
+@media(max-width:1279px){
+  .container,.container-wide{width:calc(100% - 48px)}
+  .service-row{grid-template-columns:64px minmax(0,1fr) 220px}
+}
+
+@media(max-width:900px){
+  .page-hero{padding:72px 0 56px}
+  .home-hero{padding:80px 0 56px}
+  .section{padding:64px 0}
+  .section-sm{padding:48px 0}
+  .section-head{margin-bottom:32px}
+  .page-hero-side,.home-hero .page-hero-side{max-width:680px}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .price-card{min-height:288px}
+  .pricing-row>*:last-child{text-align:left}
+}
+
+@media(max-width:720px){
+  body{word-break:normal}
+  .container,.container-wide{width:calc(100% - 32px)}
+  .site-header,.header-inner{min-height:62px}
+  .primary-nav{inset:62px 0 0;padding:16px 16px 32px;overflow:auto}
+  .page-hero{padding:56px 0 40px}
+  .home-hero{padding:64px 0 40px}
+  .page-hero h1,.home-hero h1{font-size:36px;line-height:44px}
+  .section{padding:56px 0}
+  .section-sm{padding:40px 0}
+  .section-head h2,.about-grid h2,.cta-band h2{font-size:28px;line-height:36px}
+  .direction-card{min-height:0;padding:24px 0}
+  .direction-card .number{margin-bottom:32px}
+  .service-row{grid-template-columns:36px minmax(0,1fr);gap:16px}
+  .service-row .deliverable{grid-column:2;padding:16px 0 0;border-left:0;border-top:1px solid var(--border)}
+  .work-card,.principle-card{border-radius:10px}
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card,.price-card:first-child,.price-card:nth-child(3){min-height:0;padding:24px 20px;border-left:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .price-card:last-child{border-bottom:0}
+  .price-card h2{margin-top:32px}
+  .pricing-row{grid-template-columns:1fr;gap:6px;padding:16px 0}
+  .pricing-row>*:last-child{text-align:left}
+  .translator-actions{flex-direction:column;align-items:stretch}
+  .translator-actions p{max-width:none}
+  .translator-actions .button{width:100%}
+  .contact-layout{gap:40px}
+  .cta-band{padding:40px 0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .button:active{transform:none}
+}
